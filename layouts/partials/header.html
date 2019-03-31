@@ -62,14 +62,14 @@
       </div>
     </nav>
   </div>
-  <div id="mobile-menu" uk-offcanvas="overlay: true">
+  <div id="mobile-menu" uk-offcanvas="overlay: true; flip: true">
     <div class="uk-offcanvas-bar">
         <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
-          <li class="uk-nav-header">
+          <!-- <li class="uk-nav-header">
           <a href="{{ .Site.Home.RelPermalink }}" class="uk-navbar-item uk-logo" >
               <img width="75" height="42" src="/images/solv-logo-neu.svg" class="uk-margin-small-right" uk-svg />
             </a>
-          </li>
+          </li> -->
           {{ range .Site.Menus.main }}
           {{ if .HasChildren }}
           <li class="uk-parent">
