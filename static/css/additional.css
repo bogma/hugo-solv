@@ -1,3 +1,18 @@
+#header > .uk-navbar-container {
+  background: #9b0913
+}
+#header > .uk-container {
+  background: #9b0913
+}
+
+#header >* .solv-title {
+  font-size: 2rem;
+}
+
+#mainmenu.uk-container {
+  background: #9b0913
+}
+
 /* styles for upcomming events */
 .event__item {
   position: relative;
@@ -14,7 +29,6 @@
 .event__item .event__type--extern {
   background: rgb(170, 83, 205);
 }
-
 
 .uk-section-xsmall {
   padding-top: 0.6rem;
