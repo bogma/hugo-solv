@@ -1,57 +1,71 @@
 <!-- menu -->
-<div id="mainmenu" class="uk-container uk-container-expanded uk-visible@m">
-    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" class="uk-sticky">
-        <nav class="uk-navbar-container">
-            <ul class="uk-subnav uk-flex uk-flex-right">
-                {{ range .Site.Menus.main }}
-                <li>
-                    {{ if .HasChildren }}
-                    <a href="#">{{ .Name }} <span data-uk-icon="icon: triangle-down"></span></a>
-                    <div uk-dropdown="offset: 10" class="uk-navbar-dropdown">
-                        <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
-                            {{ range .Children }}
-                            {{ if eq .Name "divider" }}
-                            <li class="uk-nav-divider"></li>
-                            {{ else if eq .Identifier "tags"}}
-                            <li class="uk-parent">
-                                <a href="#">{{ with $.Site.Data.l10n.widgets.tags.title }}{{.}}{{end}}</a>
-                                <ul class="uk-nav-sub">
-                                    {{ range $name, $items := $.Site.Taxonomies.tags }}
-                                    <li>
-                                        {{ $url := printf "%s/%s" "tags" ($name | urlize | lower)}}
-                                        <a href="{{ $url | absURL }}"><span>{{ $name }}</span><span
-                                                class="tag-list-count">{{ len $items }}</span></a>
-                                    </li>
-                                    {{ end }}
-                                </ul>
-                            </li>
-                            {{ else if eq .Identifier "archives"}}
-                            <li class="uk-parent">
-                                <a href="#">{{ with $.Site.Data.l10n.widgets.archive.title }}{{.}}{{end}}</span></a>
-                                <ul class="uk-nav-sub">
-                                    {{ range $name, $items := $.Site.Taxonomies.archives }}
-                                    <li>
-                                        {{ $url := printf "%s/%s" "archives" ($name | urlize | lower)}}
-                                        <a href="{{ $url | absURL }}"><span>{{ $name }}</span><span
-                                                class="tag-list-count">{{ len $items }}</span></a>
-                                    </li>
-                                    {{ end }}
-                                </ul>
-                            </li>
-                            {{ else }}
-                            <li>
-                                <a href="{{ .URL }}">{{ .Name }}</a>
-                            </li>
-                            {{ end }}
-                            {{ end }}
-                        </ul>
-                    </div>
-                    {{ else }}
-                    <a href="{{ .URL }}">{{ .Name }}</a>
+<div class="uk-container">
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" class="uk-sticky uk-visible@s">
+        <nav class="uk-navbar uk-navbar-container navigation__background">
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    {{ range .Site.Menus.main }}
+                    <li>
+                        {{ if .HasChildren }}
+                        <a href="#">{{ .Name }} <span data-uk-icon="icon: triangle-down"></span></a>
+                        <div uk-dropdown="offset: 10" class="uk-navbar-dropdown">
+                            <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+                                {{ range .Children }}
+                                {{ if eq .Name "divider" }}
+                                <li class="uk-nav-divider"></li>
+                                {{ else if eq .Identifier "tags"}}
+                                <li class="uk-parent">
+                                    <a href="#">{{ with $.Site.Data.l10n.widgets.tags.title }}{{.}}{{end}}</a>
+                                    <ul class="uk-nav-sub">
+                                        {{ range $name, $items := $.Site.Taxonomies.tags }}
+                                        <li>
+                                            {{ $url := printf "%s/%s" "tags" ($name | urlize | lower)}}
+                                            <a href="{{ $url | absURL }}"><span>{{ $name }}</span><span
+                                                    class="tag-list-count">{{ len $items }}</span></a>
+                                        </li>
+                                        {{ end }}
+                                    </ul>
+                                </li>
+                                {{ else if eq .Identifier "archives"}}
+                                <li class="uk-parent">
+                                    <a href="#">{{ with $.Site.Data.l10n.widgets.archive.title }}{{.}}{{end}}</span></a>
+                                    <ul class="uk-nav-sub">
+                                        {{ range $name, $items := $.Site.Taxonomies.archives }}
+                                        <li>
+                                            {{ $url := printf "%s/%s" "archives" ($name | urlize | lower)}}
+                                            <a href="{{ $url | absURL }}"><span>{{ $name }}</span><span
+                                                    class="tag-list-count">{{ len $items }}</span></a>
+                                        </li>
+                                        {{ end }}
+                                    </ul>
+                                </li>
+                                {{ else }}
+                                <li>
+                                    <a href="{{ .URL }}">{{ .Name }}</a>
+                                </li>
+                                {{ end }}
+                                {{ end }}
+                            </ul>
+                        </div>
+                        {{ else }}
+                        <a href="{{ .URL }}">{{ .Name }}</a>
+                        {{ end }}
+                    </li>
                     {{ end }}
-                </li>
-                {{ end }}
-            </ul>
+                    <!-- <li>
+                        <a href="/search"><span uk-icon="icon: search"></span>{{ with .Site.Data.l10n.search.placeholder }} {{ . }} {{ end }}</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- <div class="uk-navbar-right">
+            <div class="uk-navbar-item">
+                <span uk-icon="icon: search"></span>
+                <form>
+                    <input id="search-input" name="search-input" class="uk-input uk-form-blank uk-form-width-medium" type="text" placeholder="{{ with .Site.Data.l10n.search.placeholder }} {{ . }} {{ end }}">
+                </form>
+                <div id="search-results" class="container"></div>
+            </div>
+        </div> -->
         </nav>
     </div>
 </div>
@@ -112,6 +126,9 @@
             </li>
             {{ end }}
             {{ end }}
+            <!-- <li>
+                <a href="/search"><span uk-icon="icon: search"></span>{{ with .Site.Data.l10n.search.placeholder }} {{ . }} {{ end }}</a>
+            </li> -->
         </ul>
     </div>
 </div>

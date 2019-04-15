@@ -9,8 +9,12 @@
   font-size: 2rem;
 }
 
-#mainmenu.uk-container {
-  background: #9b0913
+.uk-section-primary {
+  background: skyblue;
+}
+
+.uk-navbar-container:not(.uk-navbar-transparent).navigation__background {
+  background: white;
 }
 
 .uk-totop {
