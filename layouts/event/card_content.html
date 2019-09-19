@@ -10,7 +10,7 @@
             {{ else if eq .Params.event.type "sbgcup" }}
             <div class="uk-card-media">
                 <div class="uk-background-contain uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle" 
-                     style="background-image: url(/images/potato.png);">
+                     style="background-image: url(/images/119542278093319550johnny_automatic_potatoes.svg.med.png);">
                 </div>
             </div>
             {{ else }}
@@ -31,16 +31,17 @@
                     </a>
                 </h5>
                 <div>
+                    {{ $outputs := .OutputFormats }}
                     <div>
                     {{ with .Resources.Match "infos/*" }}
-                        {{ partial "event_resources_list_flat" . }}
+                        {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs) }}
                         <hr class="uk-divider-small">
                     {{ end }}
                     </div>
                     <div>
                     {{ if (eq .Params.status "done")}}
                         {{ with .Resources.Match "results/*" }}
-                            {{ partial "event_resources_list_flat" . }}
+                            {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs) }}
                         {{ end }}
                     {{ end }}
                     </div>

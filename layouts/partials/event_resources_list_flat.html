@@ -1,17 +1,56 @@
-{{ $len := (len .)}}
-{{ range $index, $element := . }}
-        {{ if (intersect $element.MediaType.Suffixes (slice "pdf")) }}
+{{ $ctx := .ctx}}
+{{ $outputs := .outputs }}
+{{ $resuSet := false }}
+{{ $sBrowserSet := false }}
+{{ $createSBLink := false }}
+{{ $createResuLink := false }}
+{{ range $outputs }}
+    {{ if eq .Name "splitsbrowser" }}
+        {{ $createSBLink = true }}
+    {{ end }}
+    {{ if eq .Name "result" }}
+        {{ $createResuLink = true }}
+    {{ end }}
+{{ end }}
+
+{{ $len := (len $ctx)}}
+{{ range $index, $element := $ctx }}
+    {{ if (intersect $element.MediaType.Suffixes (slice "pdf")) }}
         <span style="color: rgb(253, 60, 25);">
             <i class="far fa-file-pdf"></i>
+            <a href="{{ .RelPermalink }}">{{ $element.Title | default $element.Name }}</a>
         </span>
-        {{ end }}
-        {{ if eq $element.ResourceType "" }}
-        <span style="color: rgb(136, 118, 115);">
-            <i class="fa fa-file"></i>
-        </span>
-        {{ end }}
-        <a href="{{ .RelPermalink }}">{{ $element.Title | default $element.Name }}</a>
-        {{ if (lt (add $index 1) $len) }}
-        &bull;
+        {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
+    {{ end }}
+    {{ if eq $createResuLink true }}
+    {{ if eq .ResourceType "json" }}
+        {{ if eq $resuSet false }}
+            <span style="color: rgb(63, 194, 81);">
+                <i class="fa fa-hand-pointer"></i>
+                <a href="{{ printf "%s/../resu.html" (path.Dir .RelPermalink) }}">Ergebnis</a>
+            </span>
+            {{ $resuSet = true }}
+            {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
         {{ end }}
     {{ end }}
+    {{ end }}
+    {{ if eq $createSBLink true }}
+    {{ if eq .ResourceType "xml" }}
+        {{ if eq $sBrowserSet false }}
+            <span style="color: rgb(63, 194, 81);">
+                <i class="fa fa-hand-pointer"></i>
+                <a href="{{ printf "%s/../splitsbrowser.html" (path.Dir .RelPermalink) }}">SplitsBrowser</a>
+            </span>
+            {{ $sBrowserSet = true }}
+            {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
+        {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ if eq $element.ResourceType "" }}
+        <span style="color: rgb(136, 118, 115);">
+            <i class="fa fa-file"></i>
+            <a href="{{ .RelPermalink }}">{{ $element.Title | default $element.Name }}</a>
+            {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
+        </span>
+    {{ end }}
+{{ end }}

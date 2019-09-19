@@ -1,11 +1,12 @@
+{{ $outputs := .OutputFormats }}
 <div>
   {{ with .Resources.Match "infos/*" }}
     <h4 class="uk-heading-line uk-text-bold"><span>Infos</span></h4>
-    {{ partial "event_resources_list" . }}
+    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs) }}
   {{ end }}
   {{ with .Resources.Match "results/*" }}
     <h4 class="uk-heading-line uk-text-bold"><span>Ergebnisse</span></h4>
-    {{ partial "event_resources_list" . }}
+    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs) }}
   {{ end }}
 </div>
 
