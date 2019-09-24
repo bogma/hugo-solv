@@ -49,6 +49,14 @@
         {{ end }}
         {{ end }}
         {{ end }}
+        {{ if eq .ResourceType "image" }}
+        <li>
+            <span style="color: rgb(223, 39, 7);">
+                <i class="fa fa-image"></i>
+                <a href="{{ .RelPermalink }}">{{ .Title | default .Name }}</a>
+            </span>
+        </li>
+        {{ end }}
         {{ if eq .ResourceType "" }}
         <li>
             <span style="color: rgb(136, 118, 115);">
