@@ -7,8 +7,13 @@
         {{ .Render "heading-line" }}
         {{ $blog := where .Pages "Type" "!=" "page"}}
         {{ $blog = $blog | intersect (where .Site.RegularPages ".Params.status" "!=" "planned") }}
+
         {{ $taxonomy := index .Site.Taxonomies.archives "2017" }}
-        {{ $archive := $taxonomy.Pages }}
+        {{ $archive2017 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2018" }}
+        {{ $archive2018 := $taxonomy.Pages }}
+        {{ $archive := $archive2017 | union $archive2018 }}
+
         {{ $blog = $blog | complement $archive }}
         {{ $paginator := .Paginate $blog }}
         {{ range .Paginator.Pages }}

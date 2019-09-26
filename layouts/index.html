@@ -7,9 +7,15 @@
         <h4 class="uk-heading-line uk-text-bold"><span>{{ with .Site.Data.l10n.articles.latest_posts }} {{ . }} {{ end }}</span></h4>
         {{ $blog := where .Site.RegularPages "Type" "in" (slice "post" "pressinfo" "event")}}
         {{ $blog = $blog | intersect (where .Site.RegularPages ".Params.status" "!=" "planned") }}
+
         {{ $taxonomy := index .Site.Taxonomies.archives "2017" }}
-        {{ $archive := $taxonomy.Pages }}
+        {{ $archive2017 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2018" }}
+        {{ $archive2018 := $taxonomy.Pages }}
+        {{ $archive := $archive2017 | union $archive2018 }}
+        
         {{ $blog = $blog | complement $archive }}
+        
         {{ $paginator := .Paginate $blog }}
         {{ range .Paginator.Pages }}
           {{ .Render "summary" }}
