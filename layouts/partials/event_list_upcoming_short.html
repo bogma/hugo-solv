@@ -1,0 +1,31 @@
+{{ $evt := where .Site.RegularPages "Type" "event" }}
+{{ $evt = $evt | intersect (where .Site.Pages ".Params.status" "in" (slice "planned" "active")) }}
+{{ $evt = sort $evt "Date" "asc" }}
+<dl class="uk-desription-list uk-description-list-divider event__item">
+    {{ range first .Site.Params.num_of_planned_events_preview $evt }}
+    <dt>
+        <div class="uk-flex uk-flex-left uk-flex-bottom">
+            <div><span class="uk-text-large">{{.Date.Day}}</span>
+                <span>{{ substr (index $.Site.Data.months (printf "%d" .Date.Month)) 0 3 }}.</span>
+                <span>{{ dateFormat .Site.Params.time_format_event_year .Date }}</span>
+            </div>
+            <div><a href="{{.RelPermalink}}"><span uk-icon="icon:link"></span></a></div>
+            <div class="uk-margin-left">
+                    {{ if and (eq .Params.status "active") (.Params.entry.anne) }}
+                        <span class="uk-text-bold">{{ partial "functions/event_anne_link" (dict "id" .Params.anne_id "link" "Anmeldung") }}</span>
+                    {{ end }}
+                </div>
+        </div>
+    </dt>
+    <dd>
+        <ul class="uk-list">
+            <li>
+                <div class="uk-label event__type--{{.Params.event.type}}">
+                    {{ partial "functions/get_folder_info" .}}
+                </div>
+            </li>
+            <li>{{ partial "event_list_meta" . }}</li>
+        </ul>
+    </dd>
+    {{ end }}
+</dl>
