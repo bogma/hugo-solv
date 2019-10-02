@@ -1,5 +1,6 @@
 {{ $ctx := .ctx}}
 {{ $outputs := .outputs }}
+{{ $links := .links }}
 {{ $resuSet := false }}
 {{ $sBrowserSet := false }}
 {{ $createSBLink := false }}
@@ -47,13 +48,11 @@
     {{ end }}
     {{ end }}
     {{ if eq .ResourceType "image" }}
-    <li>
         <span style="color: rgb(223, 39, 7);">
             <i class="fa fa-image"></i>
             <a href="{{ .RelPermalink }}">{{ .Title | default .Name }}</a>
             {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
         </span>
-    </li>
     {{ end }}
     {{ if eq $element.ResourceType "" }}
         <span style="color: rgb(136, 118, 115);">
@@ -62,4 +61,15 @@
             {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
         </span>
     {{ end }}
+{{ end }}
+{{ with $links }}
+&bull;
+{{ $len := (len $links)}}
+{{ range $index, $element := $links }}
+    <span style="color: rgb(48, 115, 179);">
+        <i class="fas fa-link"></i>
+        <a href="{{ $element.link | absURL }}">{{ $element.title }}</a>
+        {{ if (lt (add $index 1) $len) }}&bull;{{ end }}
+    </span>
+{{ end }}
 {{ end }}

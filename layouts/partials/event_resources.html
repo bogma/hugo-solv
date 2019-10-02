@@ -1,12 +1,14 @@
 {{ $outputs := .OutputFormats }}
+{{ $infolinks := .Params.resource_links.infos }}
+{{ $resulinks := .Params.resource_links.results }}
 <div>
   {{ with .Resources.Match "infos/*" }}
     <h4 class="uk-heading-line uk-text-bold"><span>Infos</span></h4>
-    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs) }}
+    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
   {{ end }}
   {{ with .Resources.Match "results/*" }}
     <h4 class="uk-heading-line uk-text-bold"><span>Ergebnisse</span></h4>
-    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs) }}
+    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
   {{ end }}
 </div>
 

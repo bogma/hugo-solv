@@ -1,5 +1,6 @@
 {{ $ctx := .ctx}}
 {{ $outputs := .outputs }}
+{{ $links := .links }}
 {{ $resuSet := false }}
 {{ $sBrowserSet := false }}
 {{ $createSBLink := false }}
@@ -65,5 +66,13 @@
             </span>
         </li>
         {{ end }}
+    {{ end }}
+    {{ range $links }}
+        <li>
+            <span style="color: rgb(48, 115, 179);">
+                <i class="fas fa-link"></i>
+                <a href="{{ .link | absURL }}">{{ .title }}</a>
+            </span>
+        </li>
     {{ end }}
 </ul>

@@ -32,16 +32,18 @@
                 </h5>
                 <div>
                     {{ $outputs := .OutputFormats }}
+                    {{ $infolinks := .Params.resource_links.infos }}
+                    {{ $resulinks := .Params.resource_links.results }}
                     <div>
                     {{ with .Resources.Match "infos/*" }}
-                        {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs) }}
+                        {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
                         <hr class="uk-divider-small">
                     {{ end }}
                     </div>
                     <div>
                     {{ if (eq .Params.status "done")}}
                         {{ with .Resources.Match "results/*" }}
-                            {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs) }}
+                            {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
                         {{ end }}
                     {{ end }}
                     </div>
