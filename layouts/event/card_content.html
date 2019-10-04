@@ -10,7 +10,13 @@
             {{ else if eq .Params.event.type "sbgcup" }}
             <div class="uk-card-media">
                 <div class="uk-background-contain uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle" 
-                     style="background-image: url(/images/119542278093319550johnny_automatic_potatoes.svg.med.png);">
+                     style="background-image: url(/images/potatoes.png);">
+                </div>
+            </div>
+            {{ else if eq .Params.event.type "relay" }}
+            <div class="uk-card-media">
+                <div class="uk-background-contain uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle" 
+                     style="background-image: url(/images/baton.png);">
                 </div>
             </div>
             {{ else }}
