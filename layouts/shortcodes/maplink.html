@@ -1,0 +1,18 @@
+  {{ $lat := .Get 0 }}
+  {{ $long := .Get 1 }}
+  {{ $txt := .Get 2 | default "-" }}
+
+  {{ if eq $txt "-"}}
+    {{ $txt = (string (delimit (slice "[" $lat "," $long "]") "")) }}
+  {{ end }}
+
+  {{ if not (eq $lat 0.0) }}
+    {{ if .Site.Params.use_google }}
+      <a href="http://www.google.com/maps/place/{{$lat}},{{$long}}">{{ $txt }}</a>
+    {{ else }}
+      <a href="http://www.openstreetmap.org/?mlat={{$lat}}&mlon={{$long}}&zoom=15">{{ $txt }}</a>
+    {{ end }}
+    <span id="coordinates">[{{$lat}}, {{$long}}]</span>
+  {{ else }}
+    {{ $txt }}
+  {{ end }}
