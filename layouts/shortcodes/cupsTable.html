@@ -15,14 +15,18 @@
                 <ul class="uk-list uk-list-bullet">
                 {{ range $c.cup }}
                  {{ $n := . }}
-                    {{ if (hasPrefix $n.link "/") }}
+                    {{ if (eq $n.link "none") }}
                     <li>
-                        <a href="{{ $n.link | absURL }}"><b>{{$n.text}}</b>
+                        <b>{{$n.text}}</b>
+                    </li>
+                    {{ else if (hasPrefix $n.link "/") }}
+                    <li>
+                        <a href="{{ $n.link | absURL }}"><b>{{$n.text}}</b></a>
                     </li>
                     {{ else }}
                     {{ $url := print "/event/" $c.year "/" $n.link }}
                     <li>
-                        <a href="{{ $url | relURL }}"><b>{{$n.text}}</b>
+                        <a href="{{ $url | relURL }}"><b>{{$n.text}}</b></a>
                     </li>
                     {{ end }}
                  {{ end }}
