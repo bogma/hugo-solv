@@ -5,12 +5,18 @@
             {{ partial "functions/map_link" (dict "ctx" .Params.meeting "txt" .Params.event.location) }}
             &bull;
             <span uk-icon="icon:calendar"></span>
+            {{ with .OutputFormats.Get "Calendar" }}
+            <a href="{{ .RelPermalink }}" uk-tooltip="iCal herunterladen">
+            {{ end }}
             <time datetime="{{ .Date }}">{{ dateFormat .Site.Params.time_format_default .Date }}</time>
             {{ $t := dateFormat .Site.Params.time_format_hhmm .Date }}
+            {{ with .OutputFormats.Get "Calendar" }}
+            </a>
+            {{ end }}
             {{ if (not (eq $t "00:00"))}}
             &bull;
             <span uk-icon="icon:clock"></span>
-            <time datetime="{{ .Date }}">{{ $t }}</time>
+            <time datetime="{{ .Date }}" uk-tooltip="Nullzeit">{{ $t }}</time>
             {{ end }}
             {{ end }}
         </div>

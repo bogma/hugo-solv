@@ -9,7 +9,7 @@
     {{ if .Site.Params.use_google }}
       <a href="http://www.google.com/maps/place/{{$lat}},{{$long}}">{{ $txt }}</a>
     {{ else }}
-      <a href="http://www.openstreetmap.org/?mlat={{$lat}}&mlon={{$long}}&zoom=15">{{ $txt }}</a>
+      <a href="http://www.openstreetmap.org/?mlat={{$lat}}&mlon={{$long}}&zoom=15" uk-tooltip="Auf der Karte anzeigen">{{ $txt }}</a>
     {{ end }}
     <span id="coordinates">[{{$lat}}, {{$long}}]</span>
   {{ else }}
