@@ -13,12 +13,12 @@ DTEND:{{- $duration = time.Duration "hour" 2 }}
       {{- dateFormat .Site.Params.time_format_ical_date_time $date_end }}
 {{- end }}
 DTSTAMP:{{dateFormat .Site.Params.time_format_ical_date_time now }}
-STATUS:CONFIRMED
+STATUS:{{if eq .Params.status "canceled"}}CANCELLED{{else}}CONFIRMED{{end}}
 UID:{{.Params.event.type}}.{{- partial "functions/get_uid.ics" . -}}@ol-sbg.at
-SUMMARY:{{ .Title }}
+SUMMARY:{{if eq .Params.status "canceled"}}{{with .Site.Data.l10n.eventstatus.canceled}}{{.}}{{end}} - {{end}}{{ .Title }}
 DESCRIPTION:{{ partial "functions/map_link.ics" (dict "ctx" .Params.meeting "txt" .Params.event.location "tag" "description") }} - {{with .Params.link}}{{. | absURL}}{{else}}{{.Permalink | absURL}}{{end}}
 LOCATION:{{ partial "functions/map_link.ics" (dict "ctx" .Params.meeting "txt" .Params.event.location "tag" "location") }}
-{{- if gt .Date now }}
+{{- if and (gt .Date now) (not (eq .Params.status "canceled")) }}
 BEGIN:VALARM
 TRIGGER:-PT7D
 ACTION:DISPLAY

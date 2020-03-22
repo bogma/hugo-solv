@@ -3,7 +3,7 @@
     <tbody>
         <tr><td>Veranstalter</td><td>{{ .Params.organiser | default "SOLV" }}</td></tr>
         <tr><td>Durchführung</td><td>{{ .Params.implementation | default "SOLV" }}</td></tr>
-        {{ if (not (eq .Params.status "planned"))}}
+        {{ if (not (or (eq .Params.status "planned") (eq .Params.status "canceled")))}}
         <tr>
             <td>Treffpunk</td>
             <td>

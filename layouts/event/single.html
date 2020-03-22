@@ -5,6 +5,11 @@
   <div class="uk-grid" data-ukgrid>
     <div class="uk-width-2-3@m">
       <article>
+        {{ if eq .Params.status "canceled" }}
+        <div>
+            <span class="uk-label uk-label-danger">{{with .Site.Data.l10n.eventstatus.canceled}}{{.}}{{end}}</span>
+        </div>
+        {{ end }}
         <header class="article-header">
           <h2 class="uk-margin-remove-adjacent uk-text-bold uk-margin-small-bottom">
             {{ .Title }}
@@ -18,7 +23,7 @@
         </header>
         {{ if (eq .Params.event.type  "extern")}}
           {{ .Content }}
-        {{ else if (eq .Params.status "planned") }}
+        {{ else if or (eq .Params.status "planned") (eq .Params.status "canceled") }}
           {{ partial "event_table" .}}
         {{ else}}
           {{ partial "event_table" .}}
