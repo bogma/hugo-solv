@@ -16,7 +16,7 @@
           </h2>
           {{ if .Params.event.name_amend }}
           <h3 class="uk-margin-remove-adjacent uk-text-bold uk-margin-small-bottom">
-            {{ .Params.event.name_amend }}
+            {{ .Params.event.name_amend | markdownify }}
           </h3>
           {{ end }}
           {{ partial "event_meta" .}}

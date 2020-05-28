@@ -38,7 +38,7 @@
                 <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold">
                     <a title="{{ .Title }}" class="uk-link-reset" href="{{ .Permalink }}">{{ .Title }}
                         {{ if .Params.event.name_amend }}
-                        ({{ .Params.event.name_amend }})
+                        ({{ .Params.event.name_amend | markdownify }})
                         {{ end }}
                     </a>
                 </h5>
