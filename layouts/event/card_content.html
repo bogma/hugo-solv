@@ -53,10 +53,8 @@
                     {{ end }}
                     </div>
                     <div>
-                    {{ if (eq .Params.status "done")}}
-                        {{ with .Resources.Match "results/*" }}
-                            {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
-                        {{ end }}
+                    {{ with .Resources.Match "results/*" }}
+                        {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
                     {{ end }}
                     </div>
                 </div>
