@@ -15,8 +15,23 @@
                         {{ dateFormat .Site.Params.time_format_hhmm $mtime2 }}
                     </time>
             </td>
+        </tr>        
+        <tr>
+            <td>Nullzeit</td>
+            <td>{{ dateFormat .Site.Params.time_format_hhmm .Date }}{{ if isset .Params "start_amend"}} {{ .Params.start_amend | markdownify }}{{ end }}</td></tr>
+        {{ if isset .Params "end"}}
+        <tr>
+            <td>Zielschluss</td>
+            <td>
+                <time>
+                    {{ $mtime := time .Date }}
+                    {{ $duration := time.Duration "minute" .Params.end }}
+                    {{ $mtime2 := $mtime.Add ($duration) }}
+                    {{ dateFormat .Site.Params.time_format_hhmm $mtime2 }}
+                </time>
+            </td>
         </tr>
-        <tr><td>Nullzeit</td><td>{{ dateFormat .Site.Params.time_format_hhmm .Date }}</td></tr>
+        {{ end }}
         <tr><td>Wettkampfart</td><td>{{ .Params.event.form }}</td></tr>
         <tr><td>Wettkampfleiter</td><td>{{ .Params.official.event }}</td></tr>
         <tr><td>Bahnleger</td><td>{{ .Params.official.course }}</td></tr>
@@ -32,10 +47,15 @@
                 {{ if or (not .Params.course.valid) (eq (len .Params.course.lenghts) 0) }}
                     Noch nicht bekannt.
                 {{ else }}
+                    <table class="uk-table uk-table-divider uk-table-small">
                     {{ range $i, $c := .Params.course.lenghts }}
-                        {{ if $i }} / {{ end }}
-                        {{ index $c 0 }} - {{ index $c 1 }} 
+                        <tr>
+                            {{ range $e := $c }}
+                                <td>{{$e}}</td>
+                            {{ end }}
+                        </tr>
                     {{ end }}
+                    </table>
                 </td>
                 {{ end }}
         </tr>
