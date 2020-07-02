@@ -1,14 +1,28 @@
 {{ $outputs := .OutputFormats }}
 {{ $infolinks := .Params.resource_links.infos }}
 {{ $resulinks := .Params.resource_links.results }}
+{{ $isActive := eq .Params.status "active" }}
+{{ $isDone := eq .Params.status "done" }}
 <div>
   {{ with .Resources.Match "infos/*" }}
     <h4 class="uk-heading-line uk-text-bold"><span>Infos</span></h4>
     {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
   {{ end }}
+  
+  {{ if ($isActive) }}
+    {{ partial "functions/event_liveresult_link" (dict "id" .Params.liveresultat_id) }}
+  {{ end }}
+
   {{ with .Resources.Match "results/*" }}
-    <h4 class="uk-heading-line uk-text-bold"><span>Ergebnisse</span></h4>
-    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
+    {{ if ($isActive) }}
+        <h4 class="uk-heading-line uk-text-bold"><span>Vorläufige Ergebnisse</span></h4>
+        {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
+    {{ end }}
+
+    {{ if ($isDone) }}
+        <h4 class="uk-heading-line uk-text-bold"><span>Ergebnisse</span></h4>
+        {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
+    {{ end }}
   {{ end }}
 </div>
 

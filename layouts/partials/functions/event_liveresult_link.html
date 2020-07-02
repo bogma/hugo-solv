@@ -1,0 +1,8 @@
+{{ $id := .id | default 0 }}
+{{ $link := .link | default "Live Resultat" }}
+
+{{ if not (eq $id 0) }}
+<div class="uk-text-bold uk-text-italic">
+    <a href="https://liveresultat.orientering.se/followfull.php?comp={{$id}}&lang=de">{{$link}}</a>
+</div>
+{{ end }}
