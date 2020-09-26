@@ -47,6 +47,7 @@
                     {{ $infolinks := .Params.resource_links.infos }}
                     {{ $resulinks := .Params.resource_links.results }}
                     {{ $isActive := eq .Params.status "active" }}
+                    {{ $isDone := eq .Params.status "done" }}
                     <div>
                     {{ with .Resources.Match "infos/*" }}
                         {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
@@ -58,8 +59,10 @@
                             {{ partial "functions/event_liveresult_link" (dict "id" .Params.liveresultat_id) }}
                         {{ end }}
                         
-                        {{ with .Resources.Match "results/*" }}
-                            {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
+                        {{ if ($isDone) }}
+                            {{ with .Resources.Match "results/*" }}
+                                {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
+                            {{ end }}
                         {{ end }}
                     </div>
                 </div>
