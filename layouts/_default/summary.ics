@@ -16,7 +16,14 @@ DTSTAMP:{{dateFormat .Site.Params.time_format_ical_date_time now }}
 STATUS:{{if eq .Params.status "canceled"}}CANCELLED{{else}}CONFIRMED{{end}}
 UID:{{.Params.event.type}}.{{- partial "functions/get_uid.ics" . -}}@ol-sbg.at
 SUMMARY:{{if eq .Params.status "canceled"}}{{with .Site.Data.l10n.eventstatus.canceled}}{{.}}{{end}} - {{end}}{{ .Title }}
-DESCRIPTION:{{ partial "functions/map_link.ics" (dict "ctx" .Params.meeting "txt" .Params.event.location "tag" "description") }} - {{with .Params.link}}{{. | absURL}}{{else}}{{.Permalink | absURL}}{{end}}
+DESCRIPTION:{{ partial "functions/map_link.ics" (dict "ctx" .Params.meeting "txt" .Params.event.location "tag" "description") }}
+{{- if isset .Params "external_link"}}
+  {{.Params.external_link | absURL}}
+{{else}}
+  {{ if isset .Params "outputs" }}
+  {{ ref . (dict "path" .Permalink "outputFormat" "html") }}
+  {{ end }}
+{{end -}}
 LOCATION:{{ partial "functions/map_link.ics" (dict "ctx" .Params.meeting "txt" .Params.event.location "tag" "location") }}
 {{- if and (gt .Date now) (not (eq .Params.status "canceled")) }}
 BEGIN:VALARM
