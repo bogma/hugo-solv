@@ -50,6 +50,10 @@
   background: #CD5360;
 }
 
+.event__item .event__type--trgcup {
+  background: #2D5360;
+}
+
 .event__item .event__type--extern {
   background: rgb(170, 83, 205);
 }

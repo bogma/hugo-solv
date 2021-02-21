@@ -18,6 +18,12 @@
                      style="background-image: url(/images/potatoes.png);">
                 </div>
             </div>
+            {{ else if eq .Params.event.type "trgcup" }}
+            <div class="uk-card-media">
+                <div class="uk-background-contain uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle" 
+                     style="background-image: url(/images/training.png);">
+                </div>
+            </div>
             {{ else if eq .Params.event.type "relay" }}
             <div class="uk-card-media">
                 <div class="uk-background-contain uk-height-small uk-panel uk-flex uk-flex-center uk-flex-middle" 

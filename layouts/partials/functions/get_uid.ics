@@ -10,7 +10,7 @@
     {{- else if eq $cType "event" -}}
         {{- with $y := index $x 1 -}}
         {{- $eType := index $x 2 -}}
-        {{- if or (eq $eType "sbgcup") (eq $eType "schcup") -}}
+        {{- if or (eq $eType "sbgcup") (eq $eType "schcup") (eq $eType "trgcup") -}}
             {{- with $m := index $x 3 -}}
                 {{- $eType -}} {{- $m -}}.{{- $y -}}
             {{- end -}}
