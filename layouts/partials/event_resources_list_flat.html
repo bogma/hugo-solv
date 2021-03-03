@@ -1,10 +1,12 @@
 {{ $ctx := .ctx}}
 {{ $outputs := .outputs }}
 {{ $links := .links }}
+
 {{ $resuSet := false }}
 {{ $sBrowserSet := false }}
 {{ $createSBLink := false }}
 {{ $createResuLink := false }}
+
 {{ range $outputs }}
     {{ if eq .Name "splitsbrowser" }}
         {{ $createSBLink = true }}
