@@ -38,7 +38,7 @@
     {{ end }}
     {{ end }}
     {{ if eq $createSBLink true }}
-    {{ if eq .ResourceType "xml" }}
+    {{ if (intersect .MediaType.Suffixes (slice "xml")) }}
         {{ if eq $sBrowserSet false }}
             <span style="color: rgb(63, 194, 81);">
                 <i class="fa fa-hand-pointer"></i>
