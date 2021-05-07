@@ -14,7 +14,9 @@
         {{ $archive2018 := $taxonomy.Pages }}
         {{ $taxonomy := index .Site.Taxonomies.archives "2019" }}
         {{ $archive2019 := $taxonomy.Pages }}
-        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2020" }}
+        {{ $archive2020 := $taxonomy.Pages }}
+        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 }}
 
         {{ $blog = $blog | complement $archive }}
         {{ $paginator := .Paginate $blog }}
