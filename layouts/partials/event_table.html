@@ -46,8 +46,12 @@
         <tr>
             <td>Bahndaten</td>
             <td>
-                {{ if or (not .Params.course.valid) (eq (len .Params.course.lenghts) 0) }}
-                    Noch nicht bekannt.
+                {{ if not .Params.course.valid }}
+                    {{ if not (eq .Params.anne_id 0) }}
+                        Siehe Ausschreibung.
+                    {{ else }}
+                        Noch nicht bekannt.
+                    {{ end }}
                 {{ else }}
                     <table class="uk-table uk-table-divider uk-table-small">
                     {{ range $i, $c := .Params.course.lenghts }}
