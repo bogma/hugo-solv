@@ -13,11 +13,10 @@
       <a href="http://www.oefol.at/anne?p=1&q=3&id={{$anneId}}">Veranstaltungsdetails</a>
     </span>
   {{ end }}
-  {{ with .Resources.Match "infos/*" }}
-    {{ if eq $anneId 0 }}<h4 class="uk-heading-line uk-text-bold"><span>Infos</span></h4>{{ end }}
-    {{ partial "event_resources_list" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
-  {{ end }}
-  
+  {{ if eq $anneId 0 }}<h4 class="uk-heading-line uk-text-bold"><span>Infos</span></h4>{{ end }}
+  {{ $infoResources := .Resources.Match "infos/*" }}
+  {{ partial "event_resources_list" (dict "ctx" $infoResources "outputs" $outputs "links" $infolinks) }}
+
   {{ if ($isActive) }}
     {{ partial "functions/event_liveresult_link" (dict "id" .Params.liveresultat_id) }}
   {{ end }}

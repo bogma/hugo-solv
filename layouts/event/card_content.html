@@ -62,11 +62,9 @@
                                 <a href="http://www.oefol.at/anne?p=1&q=3&id={{$anneId}}">Veranstaltungsdetails</a>
                             </span>
                         {{ end }}
-                    {{ with .Resources.Match "infos/*" }}
-                        {{ if gt $anneId 0 }}&bull;{{ end }}
-                        {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $infolinks) }}
+                        {{ $infoResources := .Resources.Match "infos/*" }}
+                        {{ partial "event_resources_list_flat" (dict "ctx" $infoResources "outputs" $outputs "links" $infolinks) }}
                         <hr class="uk-divider-small">
-                    {{ end }}
                     </div>
                     <div>
                         {{ if ($isActive) }}
