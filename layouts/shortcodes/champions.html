@@ -57,11 +57,11 @@
                                     <div class="uk-card uk-margin-left">
                                     {{ if eq $t "relay" }}
                                         {{ range $index, $item := $element.names }}
-                                        {{ partial "functions/name_and_club" (dict "members" $.Page.Site.Data.club_members "item" $item) }}
+                                        {{ partial "functions/name_and_club" (dict "members" $.Page.Site.Data.club_members "item" $item "year" $y) }}
                                         <br>
                                         {{ end }}
                                     {{ else }}
-                                        {{ partial "functions/name_and_club" (dict "members" $.Page.Site.Data.club_members "item" $element) }}
+                                        {{ partial "functions/name_and_club" (dict "members" $.Page.Site.Data.club_members "item" $element "year" $y) }}
                                     {{ end }}
                                     </div>
                                 </div>

@@ -1,5 +1,6 @@
 {{ $members := .members }}
 {{ $item := .item | default "" }}
+{{ $year := .year | default "0" }}
 {{ $link := .link | default false }}
 {{ $tooltip := .tooltip | default true }}
 
@@ -13,16 +14,24 @@
     {{ end }}
 {{ else }}
     {{ with $members }}
+    {{ $clubSet := false }}
     {{ range .club }}
         {{ $clubName := .name }}
         {{ $clubNameShort := .short }}
         {{ range .members }}
-            {{ if eq . $item.name }}
-                {{ if $tooltip }}
-                    <span uk-tooltip="{{ $clubName }}">({{$clubNameShort}})</span>
-                {{ else }}
-                    <span>({{$clubNameShort}})</span>
+            {{ $mName := .name }}
+            {{ $mUntil := .until | default 0}}
+            {{ if eq $clubSet false }}
+            {{ if or (le $year $mUntil) (eq $mUntil 0) }}
+                {{ if eq $mName $item.name }}
+                    {{ if $tooltip }}
+                        <span uk-tooltip="{{ $clubName }}">({{$clubNameShort}})</span>
+                    {{ else }}
+                        <span>({{$clubNameShort}})</span>
+                    {{ end }}
+                    {{ $clubSet = true }}
                 {{ end }}
+            {{ end }}
             {{ end }}
         {{ end }}
     {{ end }}
