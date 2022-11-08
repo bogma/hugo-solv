@@ -11,8 +11,10 @@
                         <div uk-dropdown="offset: 10" class="uk-navbar-dropdown">
                             <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
                                 {{ range .Children }}
-                                {{ if eq .Name "divider" }}
-                                <li class="uk-nav-divider"></li>
+                                {{ if eq .Params.type "divider" }}
+                                <li class="{{.Params.class}}"></li>
+                                {{ else if eq .Params.type "header" }}
+                                <li class="{{.Params.class}}">{{ .Name }}</li>
                                 {{ else if eq .Identifier "tags"}}
                                 <li class="uk-parent">
                                     <a href="#">{{ with $.Site.Data.l10n.widgets.tags.title }}{{.}}{{end}}</a>
@@ -40,7 +42,7 @@
                                     </ul>
                                 </li>
                                 {{ else }}
-                                <li>
+                                <li class="">
                                     <a href="{{ .URL }}">{{ .Name }}</a>
                                 </li>
                                 {{ end }}
