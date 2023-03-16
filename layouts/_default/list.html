@@ -18,6 +18,8 @@
         {{ $archive2020 := $taxonomy.Pages }}
         {{ $taxonomy := index .Site.Taxonomies.archives "2021" }}
         {{ $archive2021 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2022" }}
+        {{ $archive2022 := $taxonomy.Pages }}
         {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 | union $archive2021 }}
 
         {{ $blog = $blog | complement $archive }}
