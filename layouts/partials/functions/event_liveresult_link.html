@@ -3,6 +3,10 @@
 
 {{ if not (eq $id 0) }}
 <div class="uk-text-bold uk-text-italic">
-    <a href="https://liveresultat.orientering.se/followfull.php?comp={{$id}}&lang=de">{{$link}}</a>
+    {{ if eq $link "Live Resultat" }}
+            <a href="https://liveresultat.orientering.se/followfull.php?comp={{$id}}&lang=de">{{$link}}</a>
+    {{ else if eq $link "OResults"}}
+            <a href="https://oresults.eu/events/{{$id}}">{{$link}}</a>
+    {{ end }}
 </div>
 {{ end }}

@@ -72,7 +72,11 @@
                     </div>
                     <div>
                         {{ if ($isActive) }}
-                            {{ partial "functions/event_liveresult_link" (dict "id" .Params.liveresultat_id) }}
+                            {{ if .Params.liveresultat_id }}
+                                {{ partial "functions/event_liveresult_link" (dict "id" .Params.liveresultat_id "link" "Live Resultat") }}
+                            {{ else if .Params.oresults_id }}
+                                {{ partial "functions/event_liveresult_link" (dict "id" .Params.oresults_id "link" "OResults") }}
+                            {{ end }}
                         {{ end }}
                         
                         {{ if ($isDone) }}
