@@ -3,7 +3,7 @@
         <tr>
             <th>Verein</th>
             <th/>
-            <th>Obmann/Stellvertreter</th>
+            <th>Obmann/Obfrau/Stellvertreter</th>
             <th># Aktive</th>
         </tr>
     </thead>
@@ -13,7 +13,13 @@
         <tr>
             <td> {{ if isset $c "logo" }} <img src="{{$c.logo}}" alt="Logo {{$c.short}}" style="display:block;margin-left:auto;margin-right:auto;"> {{ end }}</td>
             <td> {{ if isset $c "website" }} <a href="http://{{$c.website}}"><b>{{$c.name}}</b></a> {{ else }} <b>{{$c.name}}</b> {{ end }} </td>
-            <td> {{ range $c.board }} {{ $n := . }} {{$n.name}} <br/> {{ end }} </td>
+            <td> {{ range $c.board }}
+                {{ $b := . }}
+                {{ if or (eq $b.position "Obfrau") (eq $b.position "Obmann") }}
+                    <b>{{$b.position}}:</b>
+                {{ end }}
+                {{$b.name}} <br/>
+                {{ end }} </td>
            <td> {{$c.membercount}} </td>
         </tr>
         {{ end }}
