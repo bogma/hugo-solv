@@ -29,7 +29,11 @@
                         {{ .Title }}
                     </a>
                 </h5>
+                {{ if .Truncated }}
                 <p class="uk-text-small uk-text-muted">{{ .Summary }}</p>
+                {{ else }}
+                <p class="uk-text-small uk-text-muted">{{ .Content }}</p>
+                {{ end }}
             </div>
             {{ if .Truncated }}
             <a href="{{ .Permalink }}" class="uk-button uk-button-default uk-button-small">

@@ -78,7 +78,6 @@
                                 {{ partial "functions/event_liveresult_link" (dict "id" .Params.oresults_id "link" "OResults") }}
                             {{ end }}
                         {{ end }}
-                        
                         {{ if ($isDone) }}
                             {{ with .Resources.Match "results/*" }}
                                 {{ partial "event_resources_list_flat" (dict "ctx" . "outputs" $outputs "links" $resulinks) }}
