@@ -22,7 +22,9 @@
         {{ $archive2022 := $taxonomy.Pages }}
         {{ $taxonomy := index .Site.Taxonomies.archives "2023" }}
         {{ $archive2023 := $taxonomy.Pages }}
-        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 | union $archive2021 | union $archive2022 | union $archive2023 }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2024" }}
+        {{ $archive2024 := $taxonomy.Pages }}
+        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 | union $archive2021 | union $archive2022 | union $archive2023 | union $archive2024 }}
 
         {{ $blog = $blog | complement $archive }}
         {{ $paginator := .Paginate $blog }}
