@@ -53,6 +53,7 @@
                     {{ $infolinks := .Params.resource_links.infos }}
                     {{ $resulinks := .Params.resource_links.results }}
                     {{ $anneId := .Params.anne_id | default 0 }}
+                    {{ $anne2Id := .Params.anne2_id | default "" }}
                     {{ $isActive := eq .Params.status "active" }}
                     {{ $isDone := eq .Params.status "done" }}
                     <div>
@@ -64,6 +65,15 @@
                             <span style="color: rgb(48, 115, 179);">
                                 <i class="fas fa-link"></i>
                                 <a href="http://www.oefol.at/anne?p=1&q=4&id={{$anneId}}">Meldungen</a>
+                            </span>
+                        {{ else if ne $anne2Id ""}}
+                            <span style="color: rgb(48, 115, 179);">
+                                <i class="fas fa-link"></i>
+                                <a href="http://anne.orienteeringaustria.at/event/{{$anne2Id}}">Veranstaltungsdetails</a>
+                            </span>
+                            <span style="color: rgb(48, 115, 179);">
+                                <i class="fas fa-link"></i>
+                                <a href="http://anne.orienteeringaustria.at/event/{{$anne2Id}}/meldungen">Meldungen</a>
                             </span>
                         {{ end }}
                         {{ $infoResources := .Resources.Match "infos/*" }}

@@ -1,8 +1,8 @@
-{{ $id := .id | default 0 }}
+{{ $id := .id | default "" }}
 {{ $link := .link | default "ANNE" }}
 
-{{ if eq $id 0 }}
-    <a href="http://www.oefol.at/anne">{{$link}}</a>
+{{ if eq $id "" }}
+    <a href="https://anne.orienteeringaustria.at/events">{{$link}}</a>
 {{ else }}
-    <a href="http://www.oefol.at/anne?p=0&q=5&id={{$id}}">{{$link}}</a>
+    <a href="https://anne.orienteeringaustria.at/event/{{$id}}/melden">{{$link}}</a>
 {{ end }}

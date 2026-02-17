@@ -12,7 +12,7 @@
             <div><a href="{{.RelPermalink}}"><span uk-icon="icon:link"></span></a></div>
             <div class="uk-margin-left">
                     {{ if and (eq .Params.status "active") (.Params.entry.anne) }}
-                        <span class="uk-text-bold">{{ partial "functions/event_anne_link" (dict "id" .Params.anne_id "link" "Anmeldung") }}</span>
+                        <span class="uk-text-bold">{{ partial "functions/event_anne_link" (dict "id" .Params.anne2_id "link" "Anmeldung") }}</span>
                     {{ end }}
                 </div>
         </div>
