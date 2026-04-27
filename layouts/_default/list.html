@@ -24,7 +24,17 @@
         {{ $archive2023 := $taxonomy.Pages }}
         {{ $taxonomy := index .Site.Taxonomies.archives "2024" }}
         {{ $archive2024 := $taxonomy.Pages }}
-        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 | union $archive2021 | union $archive2022 | union $archive2023 | union $archive2024 }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2025" }}
+        {{ $archive2025 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2026" }}
+        {{ $archive2026 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2027" }}
+        {{ $archive2027 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2028" }}
+        {{ $archive2028 := $taxonomy.Pages }}
+        {{ $taxonomy := index .Site.Taxonomies.archives "2029" }}
+        {{ $archive2029 := $taxonomy.Pages }}
+        {{ $archive := $archive2017 | union $archive2018 | union $archive2019 | union $archive2020 | union $archive2021 | union $archive2022 | union $archive2023 | union $archive2024 | union $archive2025 | union $archive2026 | union $archive2027 | union $archive2028 | union $archive2029 }}
 
         {{ $blog = $blog | complement $archive }}
         {{ $paginator := .Paginate $blog }}
